@@ -14,13 +14,18 @@ class CelestialBody:public rclcpp::Node
 
     CelestialBody();
 
+  
     // std::shared_ptr est un template
     // On crée un type de donnée dérivant de tf2_ros
     // Enfin le nom de la variable
     std::shared_ptr<tf2_ros::TransformBroadcaster> tf_broadcaster_;
 
   private:
-    void callback();
+    void callback(const celestial_body_msgs::msg::MyMsg::SHaredPtr msg);
+
+    rclcpp::Publisher<celestial_body_msgs::msg::MyMsg>::SharedPtr msg_subscription_;
+
 };
 
 #endif // __MAS_SOLARSYSTEM__CELESTIAL_BODY_H__
+

@@ -1,8 +1,0 @@
-sun_node:
-  ros__parameters:
-    radius: 0.6957 #in millions kilometers
-    mass: 1989000000 # in x10exp21 kg
-    orbital_period: -1 # in Hearth years
-    dist_from_parent: -1 # in million kilometers
-    rotation_period: 0.066995209 # in Hearth years, 24.47 Hearh days
-    axial_tilt: 0 #in radian

@@ -8,7 +8,12 @@ CelestialBody::CelestialBody()
 		   .automatically_declare_parameters_from_overrides(true))
 {
   //creation du publisher pour publier le marker sur le topic
-  publisher_ = this->create_publisher<visualization_msgs::msg::Marker>("maker_topic", 10);
+  publisher_ = this->create_publisher<visualization_msgs::msg::Marker>("marker_topic", 10);
+
+  //création du subscriber 
+  // subscriber_ = thsi->create_subcription<celestial_body::msg::MyMsg>(
+  //   "/my_other_topic",10, std::bind(&CelestialBody::callback, this, std::placeholders::_1)
+  // );
 
   //Creation d'un message Marker
   marker_msg = std::make_shared<visualization_msgs::msg::Marker>();
@@ -44,11 +49,15 @@ CelestialBody::CelestialBody()
   marker_msg -> color.b = 0.0;
   marker_msg -> color.a = 1.0;
 
-  timer_ = this->create_wall_timer(std::chrono::seconds(1), std::bind(&CelestialBody::celestial_body, this))
+  timer_ = this->create_wall_timer(std::chrono::seconds(1), std::bind(&CelestialBody::publishMyMsg, this));
 
 }
 
-void CelestialBody::celestial_body()
+void CelestialBody::callback(const celestial_body::msg::MyMsg: SharedPtr msg){
+
+}
+
+void CelestialBody::publishMyMsg()
 {
   marker_msg_ ->header.stamp = this->now();
   publisher_ -> publish(*marker_msg_);
