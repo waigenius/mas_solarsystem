@@ -8,7 +8,7 @@ CelestialBody::CelestialBody()
 		   .automatically_declare_parameters_from_overrides(true))
 {
   //creation du publisher pour publier le marker sur le topic
-  publisher_ = this->create_publisher<visualization_msgs::msg::Marker>("marker_topic", 10);
+  msg_publisher_ = this->create_publisher<visualization_msgs::msg::Marker>("marker_topic", 1);
 
   //création du subscriber 
   // subscriber_ = thsi->create_subcription<celestial_body::msg::MyMsg>(
@@ -16,49 +16,50 @@ CelestialBody::CelestialBody()
   // );
 
   //Creation d'un message Marker
-  marker_msg = std::make_shared<visualization_msgs::msg::Marker>();
+  marker_msg_ = std::make_shared<visualization_msgs::msg::Marker>();
 
   //Configuration du message Marker
-  marker_msg -> header.frame_id = "base_link"; // repère ID
-  marker_msg -> header.stamp = this -> now();
+  marker_msg_ -> header.frame_id = "base_link"; // repère ID
+  marker_msg_-> header.stamp = this -> now();
 
-  marker_msg -> ns = "my_namespace";
-  marker_msg -> id = 0; //ID unique du marker
-  marker_msg -> type = visualization_msgs::msg::Marker::SPHERE;
-  marker_msg -> action = visualization_msgs::msg::Marker::ADD;
+  marker_msg_-> ns = "my_namespace";
+  marker_msg_-> id = 0; //ID unique du marker
+  marker_msg_-> type = visualization_msgs::msg::Marker::SPHERE;
+  marker_msg_-> action = visualization_msgs::msg::Marker::ADD;
 
    // Position et orientation du marker
 
-  marker_msg -> pose.position.x = 1.0;
-  marker_msg -> pose.position.y = 2.0;
-  marker_msg -> pose.position.z = 0.0;
+  marker_msg_-> pose.position.x = 1.0;
+  marker_msg_-> pose.position.y = 2.0;
+  marker_msg_-> pose.position.z = 0.0;
 
-  marker_msg -> pose.orientation.x = 0.0;
-  marker_msg -> pose.orientation.y = 0.0;
-  marker_msg -> pose.orientation.z = 0.0;
-  marker_msg -> pose.orientation.w = 1.0;
+  marker_msg_-> pose.orientation.x = 0.0;
+  marker_msg_ -> pose.orientation.y = 0.0;
+  marker_msg_ -> pose.orientation.z = 0.0;
+  marker_msg_ -> pose.orientation.w = 1.0;
 
   // Echelle du marker
-  marker_msg -> scale.x = 0.2;
-  marker_msg -> scale.y = 0.2;
-  marker_msg -> scale.z = 0.2;
+  marker_msg_ -> scale.x = 0.2;
+  marker_msg_ -> scale.y = 0.2;
+  marker_msg_ -> scale.z = 0.2;
 
   // Couleur du marker
-  marker_msg -> color.r = 0.0;
-  marker_msg -> color.g = 1.0;
-  marker_msg -> color.b = 0.0;
-  marker_msg -> color.a = 1.0;
+  marker_msg_ -> color.r = 0.0;
+  marker_msg_ -> color.g = 1.0;
+  marker_msg_ -> color.b = 0.0;
+  marker_msg_ -> color.a = 1.0;
 
-  timer_ = this->create_wall_timer(std::chrono::seconds(1), std::bind(&CelestialBody::publishMyMsg, this));
-
-}
-
-void CelestialBody::callback(const celestial_body::msg::MyMsg: SharedPtr msg){
+  timer_ = this->create_wall_timer(std::chrono::milliseconds(100), std::bind(&CelestialBody::publishMarker, this));
 
 }
 
-void CelestialBody::publishMyMsg()
+// void CelestialBody::callback(const celestial_body_msgs::msg::MyMsg::SharedPtr msg){
+
+// }
+
+
+void CelestialBody::publishMarker()
 {
-  marker_msg_ ->header.stamp = this->now();
-  publisher_ -> publish(*marker_msg_);
+  marker_msg_->header.stamp = this->now();
+  msg_publisher_-> publish(*marker_msg_);
 }
