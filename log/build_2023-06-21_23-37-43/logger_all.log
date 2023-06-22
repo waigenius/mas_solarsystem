@@ -1,0 +1,52 @@
+[8.533s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build', '--packages-select', 'mas-solarsystem', '--symlink-install']
+[8.533s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=True, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=2, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=['mas-solarsystem'], packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0x7fea228c2710>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x7fea2310a620>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x7fea2310a620>>)
+[10.002s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[10.002s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[10.002s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[10.002s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[10.002s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[10.002s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[10.003s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/wai/workspace/ros2_ws/src/mas_solarsystem'
+[10.003s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[10.003s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[10.003s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[10.003s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[10.003s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[10.003s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[10.003s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[10.003s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[10.003s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[10.497s] DEBUG:colcon.colcon_core.package_identification:Package '.' with type 'ros.ament_cmake' and name 'mas_solarsystem'
+[10.498s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[10.498s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[10.498s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[10.498s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[10.499s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[10.509s] WARNING:colcon.colcon_core.package_selection:ignoring unknown package 'mas-solarsystem' in --packages-select
+[11.059s] INFO:colcon.colcon_core.package_selection:Skipping not selected package 'mas_solarsystem' in '.'
+[11.063s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[11.063s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[11.169s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 2 installed packages in /home/wai/workspace/ros2_ws/install
+[11.177s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 270 installed packages in /opt/ros/humble
+[11.193s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[11.572s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[11.582s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[11.646s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[11.647s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[11.647s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[11.647s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[12.218s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[12.218s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[12.219s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[14.472s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[14.711s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[14.712s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/wai/workspace/ros2_ws/src/mas_solarsystem/install/local_setup.ps1'
+[14.731s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/wai/workspace/ros2_ws/src/mas_solarsystem/install/_local_setup_util_ps1.py'
+[14.866s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/wai/workspace/ros2_ws/src/mas_solarsystem/install/setup.ps1'
+[14.902s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/wai/workspace/ros2_ws/src/mas_solarsystem/install/local_setup.sh'
+[14.916s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/wai/workspace/ros2_ws/src/mas_solarsystem/install/_local_setup_util_sh.py'
+[14.964s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/wai/workspace/ros2_ws/src/mas_solarsystem/install/setup.sh'
+[14.969s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/wai/workspace/ros2_ws/src/mas_solarsystem/install/local_setup.bash'
+[14.970s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/wai/workspace/ros2_ws/src/mas_solarsystem/install/setup.bash'
+[14.983s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/wai/workspace/ros2_ws/src/mas_solarsystem/install/local_setup.zsh'
+[14.991s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/wai/workspace/ros2_ws/src/mas_solarsystem/install/setup.zsh'
