@@ -4,17 +4,16 @@
 
 CelestialBody::CelestialBody()
 	: Node("celestial_body_node",
-    radius_ = this -> get_parameter("radius").as_double(),
 		rclcpp::NodeOptions()
 		   .allow_undeclared_parameters(true)
-		   .automatically_declare_parameters_from_overrides(true),
-           
-       )
+		   .automatically_declare_parameters_from_overrides(true))
 {
   //creation du publisher pour publier le marker sur le topic
   msg_publisher_ = this->create_publisher<visualization_msgs::msg::Marker>("marker_topic", 1);
-  tf_broadcaster_ = std::make_shared<tf2_ros::TransformBroadcaster>(this) ;
-  transform_msg_ = std::shared_ptr<geometry_msgs::msg::TransformStamped>(this);
+  tf_broadcaster_ = std::make_shared<tf2_ros::TransformBroadcaster>(this);
+
+
+  transform_msg_ = std::make_shared<geometry_msgs::msg::TransformStamped>();
 
   //Angular alpha pour 
   angular_pos_ = 0.0;
@@ -60,7 +59,27 @@ CelestialBody::CelestialBody()
   marker_msg_ -> color.b = 0.0;
   marker_msg_ -> color.a = 0.5;
 
-  timer_ = this->create_wall_timer(std::chrono::milliseconds(100), std::bind(&CelestialBody::publishMarker, this));
+  //INitialisation des onformations de transformation
+
+  transform_msg_-> header.frame_id = "base_link"; //nom repère parent
+  transform_msg_-> child_frame_id = "frame2";  //nom repère enfant
+
+  transform_msg_-> transform.translation.x = 1.0;
+  transform_msg_-> transform.translation.y = 0.5;
+  transform_msg_-> transform.translation.z = 0.0;
+  transform_msg_-> transform.rotation.x = 0.0;
+  transform_msg_-> transform.rotation.y = 0.0;
+  transform_msg_-> transform.rotation.z = 1.0;
+  transform_msg_-> transform.rotation.w = 1.0;
+  
+
+
+  // Création d'un timer pour publier le Marker et la transformation toutes les 100 ms
+  timer_ = this->create_wall_timer(
+                                    std::chrono::milliseconds(100), 
+                                    std::bind(&CelestialBody::publishTransform, this)
+                                  
+  );
 
 }
 
@@ -80,4 +99,10 @@ void CelestialBody::publishMarker()
   // attribut
 
   msg_publisher_-> publish(*marker_msg_);
+}
+
+void CelestialBody::publishTransform()
+{
+  transform_msg_ -> header.stamp = now();
+  tf_broadcaster_-> sendTransform(*transform_msg_);
 }
