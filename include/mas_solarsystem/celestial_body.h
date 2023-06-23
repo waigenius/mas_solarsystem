@@ -3,6 +3,7 @@
 
 #include <rclcpp/rclcpp.hpp>
 #include <visualization_msgs/msg/marker.hpp>
+#include <string>
 
 //Pour Publier
 #include <tf2_ros/transform_broadcaster.h>
@@ -34,8 +35,13 @@ class CelestialBody:public rclcpp::Node
 
     std::shared_ptr<tf2_ros::TransformBroadcaster> tf_broadcaster_;
 
+    std::string parentframe_id_;
+    std::string childframe_id_;
+    double dist_from_parent_;
     double angular_pos_;
+    double orbite_;
     double radius_;
+   
 
 };
 
