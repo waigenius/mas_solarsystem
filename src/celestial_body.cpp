@@ -69,7 +69,7 @@ CelestialBody::CelestialBody()
   //INitialisation des onformations de transformation
   transform_msg_-> header.frame_id = parentframe_id_ ; //nom repère parent
   transform_msg_-> child_frame_id = childframe_id_ ;  //nom repère enfant
-  transform_msg_-> transform.translation.x = dist_from_parent_;
+  transform_msg_-> transform.translation.x = dist_from_parent_ ; 
   transform_msg_-> transform.translation.y = 0.0;
   transform_msg_-> transform.translation.z = 0.0;
 
@@ -100,6 +100,8 @@ void CelestialBody::publishTransform()
   transform_msg_-> transform.translation.y = sin(angular_pos_) * orbite_;
  
   angular_pos_ += 2* M_PI/100;
+  //ajustement angular s'il dépasse 2PI
+  //angular_pos_ = std::fmod(angular_pos_, 2*M_PI); 
 
   msg_publisher_-> publish(*marker_msg_);
   transform_msg_ -> header.stamp = now();
