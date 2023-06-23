@@ -29,6 +29,7 @@ class CelestialBody:public rclcpp::Node
 
     rclcpp::Publisher<visualization_msgs::msg::Marker>::SharedPtr msg_publisher_ ; 
     std::shared_ptr<visualization_msgs::msg::Marker> marker_msg_ ;
+    
     std::shared_ptr<geometry_msgs::msg::TransformStamped> transform_msg_ ;
 
     rclcpp::TimerBase::SharedPtr timer_;
@@ -41,6 +42,10 @@ class CelestialBody:public rclcpp::Node
     double angular_pos_;
     double orbite_;
     double radius_;
+    double color_r_;
+    double color_g_;
+    double color_b_;
+    double orbital_period_;
    
 
 };

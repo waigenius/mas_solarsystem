@@ -21,7 +21,10 @@ CelestialBody::CelestialBody()
   dist_from_parent_ = this -> get_parameter("dist_from_parent").as_double();
   radius_= this -> get_parameter("radius").as_double();
   orbite_ = this -> get_parameter("orbite").as_double();
- 
+  color_r_ = this -> get_parameter("color_r").as_double();
+  color_b_ = this -> get_parameter("color_b").as_double();
+  color_g_ = this -> get_parameter("color_g").as_double();
+  orbital_period_ = this -> get_parameter("orbital_period").as_double();
 
   angular_pos_ = 0.0;
 
@@ -53,18 +56,17 @@ CelestialBody::CelestialBody()
   marker_msg_ -> pose.orientation.w = 1.0;
 
   // Echelle du marker
-  marker_msg_ -> scale.x = radius_;
-  marker_msg_ -> scale.y = radius_;
-  marker_msg_ -> scale.z = radius_;
+  marker_msg_ -> scale.x = 2*radius_;
+  marker_msg_ -> scale.y = 2*radius_;
+  marker_msg_ -> scale.z = 2*radius_;
 
   // Couleur du marker
-  marker_msg_ -> color.r = 1.0;
-  marker_msg_ -> color.g = 1.0;
-  marker_msg_ -> color.b = 0.0;
+  marker_msg_ -> color.r = color_r_;
+  marker_msg_ -> color.g = color_g_;
+  marker_msg_ -> color.b = color_b_;
   marker_msg_ -> color.a = 0.5;
 
   //INitialisation des onformations de transformation
-
   transform_msg_-> header.frame_id = parentframe_id_ ; //nom repère parent
   transform_msg_-> child_frame_id = childframe_id_ ;  //nom repère enfant
   transform_msg_-> transform.translation.x = dist_from_parent_;
@@ -76,7 +78,6 @@ CelestialBody::CelestialBody()
   transform_msg_-> transform.rotation.z = 1.0;
   transform_msg_-> transform.rotation.w = 1.0;
   
-
 
   // Création d'un timer pour publier le Marker et la transformation toutes les 100 ms
   timer_ = this->create_wall_timer( std::chrono::milliseconds(100), std::bind(&CelestialBody::publishTransform, this)
@@ -94,19 +95,14 @@ void CelestialBody::publishTransform()
 {
 
   marker_msg_-> header.stamp = this->now();
-  // Changer la pos X et Y et la rotation sur elle même (ANimation)
   
   transform_msg_-> transform.translation.x = cos(angular_pos_) * orbite_;
   transform_msg_-> transform.translation.y = sin(angular_pos_) * orbite_;
-
-  //Increment angular 
+ 
   angular_pos_ += 2* M_PI/100;
-  // attribut
 
   msg_publisher_-> publish(*marker_msg_);
   transform_msg_ -> header.stamp = now();
-
-  
 
 
   tf_broadcaster_-> sendTransform(*transform_msg_);
